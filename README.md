@@ -19,7 +19,7 @@ Build a serverless backend with the following endpoints:
 
 Details:
 
-- Use Spring Cloud Function with AWS Lambda.
+- Use Spring Boot inside an AWS Lambda function. The [handler](backend/src/main/java/org/nextpertis/saasfeedbackcollector/config/AsynchronousLambdaHandler.java) is already given for you.
 - Store data in AWS DynamoDB.
 - Use basic validation.
 - Return JSON responses.
