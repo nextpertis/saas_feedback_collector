@@ -1,51 +1,70 @@
-# SaaS Feedback Collector - Template
+# SaaS Feedback Collector
 
-This repository contains a template for creating a SaaS feedback collector. The template helps you to start with the project structure, basic functionality, and deployment setup. You can customize it according to your tasks.
+This repository contains a full-stack application for collecting SaaS feedback, consisting of a Spring Boot backend and an Angular frontend.
 
-🧩 Scenario
-Your SaaS product wants to allow users to submit feedback on features. Create a simple feedback collection system that allows users to submit feedback, view submitted entries, and list feedback by category.
+## Table of Contents
 
-## ✅ Requirements
+- [SaaS Feedback Collector](#saas-feedback-collector)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Backend](#backend)
+    - [Technologies Used](#technologies-used)
+    - [Getting Started (Backend)](#getting-started-backend)
+  - [Frontend](#frontend)
+    - [Technologies Used](#technologies-used-1)
+    - [Getting Started (Frontend)](#getting-started-frontend)
 
-### 🔧 Backend (Java 17, Spring Boot 3, AWS Lambda, AWS DynamoDB)
+## Overview
 
-Build a serverless backend with the following endpoints:
+The SaaS Feedback Collector is a web application designed to gather feedback from users of SaaS products. It is built as a monolithic application with a Java Spring Boot backend providing the API and business logic, and an Angular frontend providing the user interface.
 
-`POST /feedback` – Submit a new feedback (fields: id, userId, category, message, timestamp)
+## Backend
 
-`GET /feedback/{id}` – Get feedback by ID
+### Technologies Used
 
-`GET /feedback?category={category}` – List feedbacks filtered by category
+- **Spring Boot:** A framework for building production-ready Spring applications.
+- **Java 17:** The primary programming language.
+- **Maven:** The build automation tool.
+- **AWS SDKs:** Integration with various AWS services (Secrets Manager, Pinpoint, DynamoDB, S3, SQS).
+- **AWS SAM (Serverless Application Model):** For defining and deploying serverless resources (though not explicitly found in this directory, it's inferred from similar projects).
+- **Stripe:** For payment processing (inferred from `pom.xml`).
+- **Swagger UI:** For API documentation.
 
-Details:
+### Getting Started (Backend)
 
-- Use Spring Boot inside an AWS Lambda function. The [handler](backend/src/main/java/org/nextpertis/saasfeedbackcollector/config/AsynchronousLambdaHandler.java) is already given for you.
-- Store data in AWS DynamoDB.
-- Use basic validation.
-- Return JSON responses.
+1. **Build the project:**
+   ```bash
+   cd backend
+   mvn clean package
+   ```
+2. **Run locally:**
+   ```bash
+   java -jar target/saasfeedbackcollector-0.0.1-SNAPSHOT.jar
+   ```
+   (Note: If deployed as a Lambda, local execution might require SAM CLI.)
 
-### 🎨 Frontend (Angular 16, Responsive UI)
-Build a simple UI with:
+## Frontend
 
-- A form to submit feedback (fields: category, message)
-- A page to list all feedbacks, with category filter
-- A mobile-friendly responsive layout
+### Technologies Used
 
-Details:
+- **Angular:** A platform for building mobile and desktop web applications.
+- **TypeScript:** The primary programming language for Angular.
+- **npm/Yarn:** For package management.
 
-- Use Angular reactive forms.
-- Show loading states and basic validation.
-- Keep the design clean and usable on both mobile and desktop.
+### Getting Started (Frontend)
 
-### ☁️ Infrastructure (GitHub Actions, Deployment)
-Setup GitHub Actions to:
-
-- Lint and test code on push.
-- Build and deploy backend to AWS Lambda (can simulate deploy or use dummy script).
-- Build frontend and simulate deployment (e.g. upload to a dummy S3 bucket or simply echo a success message).
-
-## 💡 Tips
-
-- The backend can be a single Lambda function or can be split into multiple Lambda functions if needed.
-- Frontend can use mock API responses if deployment is too complex.
-- You are encouraged to use best practices (DTOs, services, validation layers).
+1. **Install dependencies:**
+   ```bash
+   cd frontend
+   npm install # or yarn install
+   ```
+2. **Run locally:**
+   ```bash
+   ng serve
+   ```
+   This will start a development server, typically accessible at `http://localhost:4200/`.
+3. **Build for production:**
+   ```bash
+   ng build --configuration production
+   ```
+   The build artifacts will be stored in the `dist/` directory.
